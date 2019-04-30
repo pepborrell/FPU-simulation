@@ -1,6 +1,6 @@
 import numpy as np
 
-def acc (qi):
+def acc (q):
     # Parameter values
     alpha0 = 1
     beta0 = 2
@@ -8,7 +8,13 @@ def acc (qi):
     alpha = alpha0/3
     beta = beta0/4
     fa = lambda r : -r - alpha*r**2 - beta*r**3
-    a = fa(qi)
+    q1 = np.roll(q, 1)
+    dif_q = q1 - q
+    a = np.zeros(len(q))
+    a += fa(dif_q)
+    dif_q1 = np.roll(dif_q, -1)
+    a -= fa(dif_q1)
+    a[0] = a[-1] = 0
 
     return a
 
@@ -31,8 +37,8 @@ def main():
     v = np.zeros((time, size))
 
     # Initial conditions
-    x[0, 0] = 1.0
-    v[0, 0] = 2.0
+    x[0, 1] = 1.0
+    v[0, 1] = 2.0
 
     vverlet(x, v, dt, time)
 
