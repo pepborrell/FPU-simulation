@@ -45,12 +45,9 @@ def main():
     vverlet(x, v, dt, time)
 
     t = np.arange(0, time)
-    fig, ax = plt.subplots(nrows = 5, ncols = 4)
-    i = 0
-    for axi in ax:
-        for axij in axi:
-            axij.plot(t, x[:, i])
-            i += 1
-    plt.show()
+    for i in range(size):
+        fig, ax = plt.subplots()
+        ax.plot(t, x[:, i])
+        plt.show()
 
 main()
