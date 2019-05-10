@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def acc(q, pot_par):
     # Parameter values for the potential
     alpha = pot_par[0]
@@ -30,7 +31,7 @@ def vverlet_step(x, v, dt, pot_par):
 def vverlet(x, v, dt, time, pot_par, tc):
     E = np.zeros((len(tc),len(x)-2)) # matrix: time checkpoints x number of modes
     for t in range(time+1): #+1 per tenir els valors en time
-        print("vverlet: step {}".format(t))
+        #print("vverlet: step {}".format(t))
         
         vverlet_step(x, v, dt, pot_par)
         
