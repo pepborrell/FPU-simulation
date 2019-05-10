@@ -4,10 +4,10 @@ from tools import *
 
 # Total time = time*dt
 time = 10000
-dt = 1e-3
+dt = 1e-1
 
 #"Time checkpoints"
-tc = [0,1000]
+tc = [0,100,1000,10000]
 
 #Size of the system / number of particles
 N = 100
@@ -18,10 +18,17 @@ beta = 2.0
 pot_par = (alpha,beta)
 
 # Initial conditions
-x = np.zeros(N)
-v = np.zeros(N)
-for i in range(10):
-    x[i] = 10.0*(-1)**i
+# x[0] and x[-1] must be zero at all times
+# idem for v[0] and v[-1]
+#We excite the first mode (n=1)
+#Stationary wave y = 2*A*sin(kx), k=2*pi/lambda, lambda=2*L/x, x/L = i/N
+v = np.zeros(N+2)
+x = np.array([np.sin(np.pi*i/(N+1)) for i in range(N+2)])
+
+#initial energy per mode
+k = np.arange(N) + 1
+plt.plot(k,calc_Ek(x,v))
+plt.show()
 
 
 # SIMULATION: CALCULATION AND PLOT
@@ -32,6 +39,7 @@ fig, ax = plt.subplots(nrows = np.shape(E)[0])
 i = 0
 for axi in ax:
     axi.plot(k, E[i,:])
+    print("E total: {}".format(np.sum(E[i,:])))
     i += 1
 plt.show()
 
