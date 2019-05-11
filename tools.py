@@ -8,13 +8,13 @@ def acc(q, pot_par):
     beta = pot_par[1]
 
     fa = lambda r : -r - alpha*r**2 - beta*r**3
-    q1 = np.roll(q, 1)
+    q1 = np.roll(q, 1) #q(j-1)
     dif_q = q - q1
     a = np.zeros(len(q))
     a += fa(dif_q)
-    q1 = np.roll(q, -1)
-    dif_q = q - q1
-    a += fa(dif_q)
+    q1 = np.roll(q, -1) #q(j+1)
+    dif_q = q1-q
+    a -= fa(dif_q)
     a[0] = a[-1] = 0
 
     return a
@@ -31,7 +31,7 @@ def vverlet_step(x, v, dt, pot_par):
 def vverlet(x, v, dt, time, pot_par, tc):
     E = np.zeros((len(tc),len(x)-2)) # matrix: time checkpoints x number of modes
     for t in range(time+1): #+1 per tenir els valors en time
-        #print("vverlet: step {}".format(t))
+        print("vverlet: step {}".format(t))
         
         vverlet_step(x, v, dt, pot_par)
         
