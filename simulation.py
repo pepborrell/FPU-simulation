@@ -37,10 +37,10 @@ k = np.arange(N) + 1
 fig, ax = plt.subplots(nrows = np.shape(E)[0])
 i = 0
 for axi in ax:
-    axi.plot(k, E[i,:])
+    axi.stem(k, E[i,:], linefmt=':', markerfmt='C0.')
     print("E total: {}".format(np.sum(E[i,:])))
     i += 1
-plt.show()
+plt.savefig('figura.png')
 
 
 # Calculate Ek for 1 <= k <= N
