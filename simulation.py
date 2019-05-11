@@ -3,7 +3,7 @@ from tools import *
 # SIMULATION PARAMETERS
 
 # Total time = time*dt
-time = 500000
+time = 100000
 dt = 1e-1
 
 #"Time checkpoints"
@@ -13,7 +13,7 @@ tc = [0,1000,10000,100000,200000,400000,500000]
 N = 100
 
 # Potential parameters
-alpha = -1.0
+alpha = -5.0
 beta = 2.0
 pot_par = (alpha,beta)
 
@@ -33,11 +33,12 @@ x = np.array([1*np.sin(np.pi*i/(N+1)) for i in range(N+2)])
 # SIMULATION: CALCULATION AND PLOT
 E = vverlet(x, v, dt, time, pot_par, tc)
 
-k = np.arange(N) + 1 
+k = np.arange(N) + 1
 for i in range(E.shape[0]):
+    fig, ax = plt.subplots()
     print("E total at time {}: {}".format(tc[i],np.sum(E[i,:])))
-    plt.stem(k,E[i,:], linefmt=':', markerfmt='C0.')
-    plt.savefig("plots/energy_modes_{}.png".format(tc[i]))
+    ax.plot(k,E[i,:]) #, linefmt=':', markerfmt='C0.')
+    plt.savefig('./plots/energy_modes_{}.png'.format(tc[i]))
 
 # Calculate Ek for 1 <= k <= N
 # Plot Ek w.r.t. k

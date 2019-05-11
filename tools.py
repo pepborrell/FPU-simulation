@@ -27,14 +27,14 @@ def vverlet_step(x, v, dt, pot_par):
 
 # Pre: x and v contain the initial conditions for position and velocity of each particle
 # Post: x and v contain the position and velocity for each particle at time time*dt
-# Retorna una matriu amb l'energia de cada mode per cada temps de tc 
+# Retorna una matriu amb l'energia de cada mode per cada temps de tc
 def vverlet(x, v, dt, time, pot_par, tc):
     E = np.zeros((len(tc),len(x)-2)) # matrix: time checkpoints x number of modes
     for t in range(time+1): #+1 per tenir els valors en time
         print("vverlet: step {}".format(t))
-        
+
         vverlet_step(x, v, dt, pot_par)
-        
+
         if t in tc:
             E[tc.index(t)] = calc_Ek(x,v)
     return E
@@ -49,7 +49,7 @@ def aux_calc_Ek(v):
         res = res + v[i]*np.sin(np.pi*k*i/(N+1))
     res = res * np.sqrt(2/(N+1))
     return res
-    
+
 # q = vector posicions (respecte equilibri)
 # v = vector velocitats
 # N doesn't count the edge particles (which are fixed)
