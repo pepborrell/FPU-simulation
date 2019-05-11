@@ -33,15 +33,11 @@ x = np.array([1*np.sin(np.pi*i/(N+1)) for i in range(N+2)])
 # SIMULATION: CALCULATION AND PLOT
 E = vverlet(x, v, dt, time, pot_par, tc)
 
-k = np.arange(N) + 1
-fig, ax = plt.subplots(nrows = np.shape(E)[0])
-i = 0
-for axi in ax:
-    axi.stem(k, E[i,:], linefmt=':', markerfmt='C0.')
-    print("E total: {}".format(np.sum(E[i,:])))
-    i += 1
-plt.savefig('figura.png')
-
+k = np.arange(N) + 1 
+for i in range(E.shape[0]):
+    print("E total at time {}: {}".format(tc[i],np.sum(E[i,:])))
+    plt.stem(k,E[i,:], linefmt=':', markerfmt='C0.')
+    plt.savefig("plots/energy_modes_{}.png".format(tc[i]))
 
 # Calculate Ek for 1 <= k <= N
 # Plot Ek w.r.t. k
