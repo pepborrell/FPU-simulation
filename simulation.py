@@ -3,14 +3,14 @@ from tools import *
 # SIMULATION PARAMETERS
 
 # Total time = time*dt
-time = 10000
+time = 2000000
 dt = 1e-1
 
 #"Time checkpoints"
-tc = [0,1000,10000,100000,200000,400000,500000]
+tc = [0,1000,10000,100000,200000,400000,500000,1000000,1500000,2000000]
 
 #Size of the system / number of particles
-N = 1023
+N = 100
 
 # Potential parameters
 alpha = -1.0
@@ -23,7 +23,7 @@ pot_par = (alpha,beta)
 #We excite the first mode (n=1)
 #Stationary wave y = 2*A*sin(kx), k=2*pi/lambda, lambda=2*L/x, x/L = i/N
 v = np.zeros(N+2)
-A = 25
+A = 1 # such that the total energy is of the order of N*10^-4
 x = np.array([A*np.sin(np.pi*i/(N+1)) for i in range(N+2)])
 
 #initial energy per mode
@@ -41,12 +41,3 @@ for i in range(E.shape[0]):
     ax.plot(k,E[i,:]) #, linefmt=':', markerfmt='C0.')
     ax.set_yscale('log')
     plt.savefig('./plots/energy_modes_{}.png'.format(tc[i]))
-
-# Calculate Ek for 1 <= k <= N
-# Plot Ek w.r.t. k
-# Repeat for different values of time
-
-
-# chat zone
-'''
-'''
