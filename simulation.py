@@ -3,11 +3,12 @@ from tools import *
 # SIMULATION PARAMETERS
 
 # Total time = time*dt
-time = 2000000
+time = 10000000
 dt = 1e-1
 
 #"Time checkpoints"
-tc = [0,1000,10000,100000,200000,400000,500000,1000000,1500000,2000000]
+tc = [0,1000,10000,100000,200000,400000,500000,1000000,1500000,2000000,
+        5000000,10000000]
 
 #Size of the system / number of particles
 N = 100
